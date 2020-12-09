@@ -5,6 +5,7 @@ function resetBoard () {
         block.innerText = "";
         block.classList.remove("occupied")
     });
+    winner_div.textContent = ""
 }
 
 function switchTurns () {
