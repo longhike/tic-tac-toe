@@ -30,7 +30,7 @@ function isValidPlay (choice) {
 }
 
 function checkWin (current_turn) {
-    if (checkByFirstColumn(current_turn) || checkBySecondColumn(current_turn) || checkByThirdColumn(current_turn) || checkByFirstRow(current_turn) || checkBySecondRow(current_turn) || checkByThirdRow(current_turn) || checkByLeftRightDiag(current_turn) || checkByRightLeftDiag(current_turn)) {
+    if (winByColumn(current_turn) || winByRow(current_turn) || checkByLeftRightDiag(current_turn) || checkByRightLeftDiag(current_turn)) {
         return true;
     } else {
         return false;
@@ -39,55 +39,34 @@ function checkWin (current_turn) {
 
 // win helpers
 
-function checkByFirstColumn(current_turn) {
-    for (i = 0; i <= 6; i += 3) {
-        if (board[i] !== current_turn) {
-            return false;
+function winByRow (current_turn) {
+    for (i = 0; i < 9; i += 3) {
+        if (board[i] === current_turn && board[i] === board[i+1] && board[i+1] === board[i+2]) {
+            return true;
         }
     }
-    return true
+    return false; 
 }
 
-function checkBySecondColumn(current_turn) {
-    for (i = 1; i <= 7; i += 3) {
-        if (board[i] !== current_turn) {
-            return false;
+function winByColumn(current_turn) {
+    let j = 0
+    let k = 6
+    while (j <= 2) {
+        if (columnHelper(j, k, current_turn)) {
+            return true;
+        }
+        else {
+            j++
+            k++
         }
     }
-    return true
+    return false;
 }
 
-function checkByThirdColumn(current_turn) {
-    for (i = 2; i <= 8; i += 3) {
+function columnHelper (start_index, last_index, current_turn) {
+    for (i = start_index; i <= last_index; i += 3) {
         if (board[i] !== current_turn) {
-            return false;
-        }
-    }
-    return true
-}
-
-function checkByFirstRow(current_turn) {
-    for (i = 0; i <= 2; i++) {
-        if (board[i] !== current_turn) {
-            return false;
-        }
-    }
-    return true
-}
-
-function checkBySecondRow(current_turn) {
-    for (i = 3; i <= 5; i++) {
-        if (board[i] !== current_turn) {
-            return false;
-        }
-    }
-    return true
-}
-
-function checkByThirdRow(current_turn) {
-    for (i = 6; i <= 8; i++) {
-        if (board[i] !== current_turn) {
-            return false;
+            return false
         }
     }
     return true
