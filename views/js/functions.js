@@ -1,3 +1,11 @@
+function startQuestion () {
+    if (confirm(start_question)) {
+        computer = true;
+    } else {
+        computer = false;
+    }
+}
+
 function resetBoard () {
     this_turn = "X";
     board = new Array(9);
@@ -6,19 +14,37 @@ function resetBoard () {
         block.classList.remove("occupied");
     });
     winner_div.textContent = "";
+    startQuestion()
 }
 
 function switchTurns () {
-    switch (this_turn) {
-        case "X":
-            this_turn = "O";
-            break;
-        case "O":
-            this_turn = "X";
-            break;
-        default:
-            break;
+    if (!computer) {
+        switch (this_turn) {
+            case "X":
+                this_turn = "O";
+                break;
+            case "O":
+                this_turn = "X";
+                break;
+            default:
+                break;
+        }
+    } else if (computer) {
+        switch (this_turn) {
+            case "X":
+                this_turn = "O";
+                comp_turn = true;
+                doComputerTurn(board);
+                break;
+            case "O":
+                this_turn = "X";
+                break;
+            default:
+                comp_turn = false;
+                break;
+        }
     }
+    
 }
 
 function isValidPlay (choice) {

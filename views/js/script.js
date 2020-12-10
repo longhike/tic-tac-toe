@@ -1,3 +1,5 @@
+startQuestion()
+
 document.addEventListener('click', (e) => {
     e.preventDefault();
     let this_id = e.target.id;
