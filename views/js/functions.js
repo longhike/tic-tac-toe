@@ -3,9 +3,9 @@ function resetBoard () {
     board = new Array(9);
     all_blocks.forEach((block) => {
         block.innerText = "";
-        block.classList.remove("occupied")
+        block.classList.remove("occupied");
     });
-    winner_div.textContent = ""
+    winner_div.textContent = "";
 }
 
 function switchTurns () {
@@ -49,15 +49,15 @@ function winByRow (current_turn) {
 }
 
 function winByColumn(current_turn) {
-    let j = 0
-    let k = 6
+    let j = 0;
+    let k = 6;
     while (j <= 2) {
         if (columnHelper(j, k, current_turn)) {
             return true;
         }
         else {
-            j++
-            k++
+            j++;
+            k++;
         }
     }
     return false;
@@ -66,24 +66,24 @@ function winByColumn(current_turn) {
 function columnHelper (start_index, last_index, current_turn) {
     for (i = start_index; i <= last_index; i += 3) {
         if (board[i] !== current_turn) {
-            return false
+            return false;
         }
     }
-    return true
+    return true;
 }
 
 function checkByLeftRightDiag(current_turn) {
     if (board[0] === current_turn && board[0] === board[4] && board[4] === board[8]) {
-        return true
+        return true;
     } else {
-        return false
+        return false;
     }
 }
 
 function checkByRightLeftDiag(current_turn) {
     if (board[2] === current_turn && board[2] === board[4] && board[4] === board[6]) {
-        return true
+        return true;
     } else {
-        return false
+        return false;
     }
 }
